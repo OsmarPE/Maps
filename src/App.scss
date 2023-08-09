@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+$color-black-100:#000;
+$color-gray-100:#F5F5F5;
+$color-gray-200:#D4D4D4;
+$color-gray-300:#6b7280;
+
+$ff-primary:'Outfit', sans-serif;
+
+body{
+    font-family: $ff-primary;
+}
+.container{
+    width: min(90%,1200px);
+    margin: 0 auto;
+}
+
+
+.header{
+    &__body{
+        height: 100px;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: max-content 1fr max-content ;
+        justify-items: center;
+        align-items: center;
+    }
+    &__logo{
+        font-size: 1rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: inline-flex;
+        gap: .5rem;
+        align-items: center;
+    }
+}
+
+.form{
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    &__input{
+        width: 100%;
+        height: 50px;
+        background-color: $color-gray-100;
+        color: $color-gray-300;
+        border-radius: 6px;
+        outline: 0;
+        font-size: 1rem;
+        font-family: inherit;
+        padding: 0 .5rem 0 3rem;
+        border: 2px solid transparent;
+        transition: all 0.4s ease;
+        &::placeholder{
+            color: $color-gray-200;
+        }
+        &:where(:hover,:focus){
+            border: 2px solid $color-gray-300;
+        }
+    }
+
+     & > svg{
+        position: absolute;
+        top: 50%;
+        left: 1.5rem;
+        transform: translate(-50%,-50%);
+
+    }
+}
+
+.maps{
+    padding: 1rem;
+    border-radius: 1.25rem;
+    background: #FFF;
+    box-shadow: 0px 4px 30px 4px rgba(0, 0, 0, 0.07);
+    &__content{
+
+    }
+}
