@@ -1,35 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-$color-black-100:#000;
-$color-gray-100:#F5F5F5;
-$color-gray-200:#D4D4D4;
-$color-gray-300:#6b7280;
 
-$ff-primary:'Outfit', sans-serif;
+$color-black-100: #000;
+$color-gray-100: #F5F5F5;
+$color-gray-200: #D4D4D4;
+$color-gray-300: #6b7280;
+$color-gray-400: #4B5563;
+$color-gray-500: #3f3f46;
+$color-gray-600: #27272a;
 
-body{
+$ff-primary: 'Outfit', sans-serif;
+
+body {
     font-family: $ff-primary;
 }
-.container{
-    width: min(90%,1200px);
+
+@mixin table(){
+    @media screen and (width >= 768px) {
+        @content;
+    }
+}
+@mixin desktop(){
+    @media screen and (width >= 1024px) {
+        @content;
+    }
+}
+
+.container {
+    width: min(90%, 1200px);
     margin: 0 auto;
 }
 
 
-.header{
-    &__body{
-        height: 100px;
+.header {
+    &__body {
+        padding: 1.5rem 0;
         display: grid;
-        gap: 1rem;
-        grid-template-columns: max-content 1fr max-content ;
+        gap: 1.5rem;
         justify-items: center;
-        align-items: center;
+        @include desktop(){
+            height: 100px;
+            padding: 0;
+            gap: 1rem;
+            grid-template-columns: max-content 1fr max-content;
+            align-items: center;
+        }
     }
-    &__logo{
+
+    &__logo {
         font-size: 1rem;
         font-weight: 500;
         text-transform: uppercase;
@@ -40,11 +63,12 @@ body{
     }
 }
 
-.form{
+.form {
     position: relative;
     width: 100%;
     max-width: 500px;
-    &__input{
+
+    &__input {
         width: 100%;
         height: 50px;
         background-color: $color-gray-100;
@@ -56,29 +80,131 @@ body{
         padding: 0 .5rem 0 3rem;
         border: 2px solid transparent;
         transition: all 0.4s ease;
-        &::placeholder{
+
+        &::placeholder {
             color: $color-gray-200;
         }
-        &:where(:hover,:focus){
+
+        &:where(:hover, :focus) {
             border: 2px solid $color-gray-300;
         }
     }
 
-     & > svg{
+    &>svg {
         position: absolute;
         top: 50%;
         left: 1.5rem;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
 
     }
 }
 
-.maps{
-    padding: 1rem;
-    border-radius: 1.25rem;
-    background: #FFF;
-    box-shadow: 0px 4px 30px 4px rgba(0, 0, 0, 0.07);
+
+
+.maps {
+    position: relative;
+    margin: 1rem 0 2rem;
     &__content{
+        padding: 1rem;
+        border-radius: 1.25rem;
+        background: #FFF;
+        box-shadow: 0px 4px 30px 4px rgba(0, 0, 0, 0.07);
 
     }
+
+}
+
+.leaflet-container {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    @include table(){
+        aspect-ratio: 6 / 5 ;     
+    }
+    @include desktop(){
+        aspect-ratio: 15 / 7;     
+    }
+}
+
+.alert {
+    position: fixed;
+    z-index: 1000;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%,-40%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem;
+    width:90%;
+    max-width: 500px;
+    padding: 1rem 0;
+    border-radius: 0.625rem;
+    background: #FFF;
+    opacity: 0;
+    transition: all 0.4s ease;
+    box-shadow: 0px 4px 30px 0px rgba(61, 61, 61, 0.10);
+    @include table(){
+        bottom: 100px;
+    }
+    &__message{
+        font-weight: 500;
+        font-size: 1rem;
+
+    }
+    &.active{
+        opacity: 1;
+        transform: translate(-50%,0);
+    }
+}
+
+.details{
+    background-color: $color-black-100;
+    color: white;
+    border-radius: 0.625rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    @include table(){
+        position: absolute;
+        backdrop-filter: blur(7.5px);
+        z-index: 600;
+        background: rgba(255, 255, 255, 0.41);
+        pointer-events: none;
+        top: 1.5rem;
+        right: 1.5rem;
+        width:42%;
+        max-width: 400px;
+        color: black;
+    }
+
+    &__item{
+        padding: 1rem 0;
+        border-bottom: 1px solid $color-gray-600;
+        @include table(){
+            border-bottom: 1px solid #95979ac0;
+        }
+        &:first-child{
+            padding: 0 0 1rem;
+        }
+        &:last-child{
+            border: 0;
+            padding: 1rem 0 0;
+        }
+    }
+    &__title{
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: .1rem;
+        color: $color-gray-500;
+        @include table(){
+            color: $color-gray-400;
+        }
+
+    }
+    &__copy{
+        font-size: 1.46rem;
+        font-weight: 600;
+    }
+
 }
